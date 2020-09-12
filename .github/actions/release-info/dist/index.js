@@ -8983,8 +8983,8 @@ function main() {
         }
         core.setOutput("distTag", distTag);
         core.setOutput("version", version);
-        throw new Error("Stop release");
         console.log({ distTag, version });
+        throw new Error("Stop release");
     });
 }
 
