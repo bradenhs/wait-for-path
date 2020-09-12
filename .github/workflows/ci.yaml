@@ -21,7 +21,7 @@ jobs:
   #     - run: npm run test
   release:
     name: Release
-    needs: check
+    # needs: check
     if: github.event_name	== 'push'
     runs-on: ubuntu-latest
     steps:
