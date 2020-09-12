@@ -8976,7 +8976,7 @@ function main() {
             distTag = version.split(/\-(.+)/)[1];
         }
         if (distTag === "latest") {
-            const latestVersion = child_process_1.execSync("npm show type-route version").toString();
+            const latestVersion = child_process_1.execSync("npm show wait-for-path version").toString();
             if (semver_1.default.lt(version, latestVersion)) {
                 distTag = github.context.sha;
             }
@@ -8984,7 +8984,6 @@ function main() {
         core.setOutput("distTag", distTag);
         core.setOutput("version", version);
         console.log({ distTag, version });
-        throw new Error("Stop release");
     });
 }
 
