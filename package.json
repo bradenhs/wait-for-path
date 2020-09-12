@@ -1,0 +1,40 @@
+{
+  "name": "wait-for-path",
+  "version": "0.0.0",
+  "description": "Efficiently wait for a path to exist (cross-platform).",
+  "author": "Braden Snell",
+  "license": "MIT",
+  "main": "lib/waitForPath.js",
+  "types": "lib/waitForPath.d.ts",
+  "bin": {
+    "wait-for-path": "./cli/cli.js"
+  },
+  "scripts": {
+    "test": "jest --runInBand",
+    "lint": "eslint src --max-warnings=0",
+    "build:cli": "shx rm -rf ./cli && tsc --project tsconfig.cli.json && shx chmod +x ./cli/cli.js",
+    "build:lib": "shx rm -rf ./lib && tsc --project tsconfig.lib.json",
+    "build": "npm run build:cli && npm run build:lib"
+  },
+  "files": [
+    "cli",
+    "lib"
+  ],
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.1",
+    "@types/jest": "^26.0.13",
+    "@types/node": "^14.10.1",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "@typescript-eslint/parser": "^4.1.0",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "fs-extra": "^9.0.1",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.1",
+    "shx": "^0.3.2",
+    "ts-jest": "^26.3.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  }
+}

@@ -1,0 +1,54 @@
+name: CI
+
+on: [push]
+
+jobs:
+  check:
+    name: Check
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - run: npm install
+      - run: npm run build
+      - run: npm run lint
+      - run: npm run test
+  release:
+    name: Release
+    needs: check
+    if: github.event_name	== 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+          registry-url: https://registry.npmjs.org
+      - name: Determine Release Information
+        id: release-info
+        uses: ./.github/actions/release-info
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Set Version
+        run: npm version ${{ steps.release-info.outputs.version }} --git-tag-version=false
+      - name: Publish
+        run: |
+          args=( --tag="${{ steps.release-info.outputs.distTag }}" )
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "Auth token not found. Executing dry run publish."
+            args+=( --dry-run )
+          fi;
+          npm publish "${args[@]}"
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "Dry run publish complete."
+          fi;
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
