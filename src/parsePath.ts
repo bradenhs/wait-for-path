@@ -3,8 +3,6 @@ import { normalize, sep, resolve } from "path";
 /**
  * Normalizes the input path, converts it to an absolute path if
  * it is not already one, and returns and array of path segments.
- *
- * @inner
  */
 export function parsePath(path: string): string[] {
   // Since the leading part of the resolved path will be "/"
