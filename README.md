@@ -95,3 +95,5 @@ exposed via tooling to the user (as done in [Type Route](https://github.com/type
 - Expand API to allow users to cancel the `waitForPath` promise and clean up any file system
 watchers.
 - Setup code coverage reporting.
+- Consider more efficient implementation that does not involved reattaching watchers for the
+entire path every time anything changes.

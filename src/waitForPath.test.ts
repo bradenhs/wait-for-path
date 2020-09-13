@@ -88,7 +88,7 @@ describe("waitForPath", () => {
     expect(await tryGetResult()).toBeInstanceOf(fs.Stats);
   });
 
-  it.only("should work with a really long path", async () => {
+  it("should work with a really long path", async () => {
     const { tryGetResult } = createPathAwaiterUtil(
       "./tmp/foo/bar/baz/hello/world"
     );
