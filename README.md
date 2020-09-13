@@ -1,7 +1,7 @@
 <br/>
 <br/>
 <p align="center">
-  <img src="https://github.com/bradenhs/wait-for-path/blob/master/artwork/logo.svg" width="400" alt="Wait for Path"/>
+  <img src="https://raw.githubusercontent.com/bradenhs/wait-for-path/master/artwork/logo.svg" width="400" alt="Wait for Path"/>
 </p>
 <br/>
 <br/>
