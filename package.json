@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "lib/waitForPath.js",
   "types": "lib/waitForPath.d.ts",
+  "homepage": "https://github.com/bradenhs/wait-for-path",
   "bin": {
     "wait-for-path": "./cli/cli.js"
   },
