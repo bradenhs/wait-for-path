@@ -68,7 +68,7 @@ again starting at the root directory.
 
 `npm install` - to install dependencies.
 
-`npm test` - to run all tests. CI is setup to run the tests against Windows, MacOS, and Ubuntu if you
+`npm test` - to run all tests. [CI is setup with GitHub actions](https://github.com/bradenhs/wait-for-path/actions) to run the tests against Windows, MacOS, and Ubuntu if you
 want to do some cross platform testing and don't have access to each OS.
 
 `npm run lint` - to run the linter.
