@@ -68,7 +68,7 @@ function waitForNextPathChange(
       const watcher = fs.watch(partialPath, reportPathChange);
 
       watcher.on("close", () => {
-        if (pathChangeReported === false) {
+        if (!watchersClosed && pathChangeReported === false) {
           closeWatchers();
           reject(new Error("File watcher closed unexpectedly."));
         }
