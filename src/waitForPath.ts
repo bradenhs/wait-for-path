@@ -17,15 +17,20 @@ export interface WaitForPathResult extends Promise<fs.Stats> {
 export function waitForPath(path: string) {
   const pathSegments = parsePath(path);
   let closed = false;
-  let close: () => void;
+  let close: (() => void) | undefined;
   let bail: (error: any) => void;
 
-  const result = checkPathRecursive() as WaitForPathResult;
-  result.close = (error?: any) => {
+  const result = new Promise((resolve, reject) => {
+    resolve(checkPathRecursive());
+    bail = reject;
+  }) as WaitForPathResult;
+
+  result.close = (error) => {
     error && bail(error);
     closed = true;
-    close();
+    close?.();
   };
+
   return result;
 
   async function checkPathRecursive(): Promise<fs.Stats> {
@@ -41,7 +46,7 @@ export function waitForPath(path: string) {
     }
     await new Promise<void>((resolve, reject) => {
       if (closed) return; // Stay pending forever if closed without error.
-      close = waitForNextPathChange(pathSegments, resolve, (bail = reject));
+      close = waitForNextPathChange(pathSegments, resolve, reject);
     });
     return checkPathRecursive();
   }
